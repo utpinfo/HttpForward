@@ -50,7 +50,7 @@ public class HanlpCustomDictService {
                     freq = dict.getFrequency() != null ? Integer.parseInt(dict.getFrequency()) : 0;
                 } catch (NumberFormatException ignored) {
                 }
-                CustomDictionary.add(dict.getWord(), nature + " " + freq);
+                CustomDictionary.insert(dict.getWord(), nature + " " + freq);
                 count++;
             }
         }

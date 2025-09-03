@@ -28,7 +28,7 @@ public class demo {
         HanLP.Config.CoreDictionaryPath = hanlpRoot + "/data/dictionary/CoreNatureDictionary.txt";
         HanLP.Config.CustomDictionaryPath = new String[]{hanlpRoot + "/data/dictionary/custom/人名词典.txt"};
         //CustomDictionary.add("楊馮凱", "nr 1024");
-        String sentence = "查询莊承豪, 2025-01-01的对账单";
+        String sentence = "查询莊承豪, 2025-01-01到2025-01-30的对账单";
         sentence = sentence.replaceAll("\\s+", "");
         for (Term term : NLPTokenizer.segment(sentence)) {
             if (term.word.matches("\\d{4}([-/.年])\\d{1,2}([-/.月])\\d{1,2}日?")

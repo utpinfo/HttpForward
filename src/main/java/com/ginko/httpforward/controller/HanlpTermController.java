@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.ginko.httpforward.utils.LanguageUtils.detectLanguageCode;
+
 @RestController
 @RequestMapping(value = "/api/v0/hanlp", produces = "application/json;charset=UTF-8")
 public class HanlpTermController {
@@ -25,6 +27,16 @@ public class HanlpTermController {
     public List<HanlpTerm> getWord(@RequestBody UfmHanlpDict requestbody) {
         String sentence = requestbody.getWord();
         sentence = sentence.replaceAll("\\s+", "");//避免多餘空白, 導致解析異常
+        /*
+        // 1. 語言檢測
+        //String lang = detectLanguageCode(sentence); // 返回 zh-CN / zh-TW / en / ja / ko ...
+        // 2. 如果是 zh-TW，可以選擇先轉成繁體（可選）
+        if ("zh-TW".equals(lang)) {
+            sentence = HanLP.convertToTraditionalChinese(sentence);
+            // 這裡可以做中文回答邏輯或其他繁體處理
+        }
+        */
+        // 3. 分詞內容
         //System.out.println(HanLP.segment(sentence));
         //List<HanlpTerm> resp = HanLP.segment(sentence).stream()
         List<HanlpTerm> resp = NLPTokenizer.segment(sentence).stream()

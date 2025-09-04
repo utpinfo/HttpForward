@@ -59,5 +59,8 @@ public class HanlpCustomDictService {
             msg += " (過濾時間: " + sdf.format(filterTime) + ")";
         }
         System.out.println(msg);
+        System.out.println("Scheduled triggered: " + System.currentTimeMillis()
+                + " Thread: " + Thread.currentThread().getName()
+                + " Bean hash: " + this.hashCode());
     }
 }

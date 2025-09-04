@@ -18,6 +18,9 @@ import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 
+import static com.ginko.httpforward.utils.LanguageUtils.detectLanguageCode;
+
+
 public class demo {
     private static UfmHanlpDictRepository repo;
 
@@ -28,7 +31,10 @@ public class demo {
         HanLP.Config.CoreDictionaryPath = hanlpRoot + "/data/dictionary/CoreNatureDictionary.txt";
         HanLP.Config.CustomDictionaryPath = new String[]{hanlpRoot + "/data/dictionary/custom/人名词典.txt"};
         //CustomDictionary.add("楊馮凱", "nr 1024");
-        String sentence = "查询莊承豪, 2025-01-01到2025-01-30的对账单";
+        String sentence = "你好杨冯凯";
+        System.out.println(detectLanguageCode(sentence));
+
+
         sentence = sentence.replaceAll("\\s+", "");
         for (Term term : NLPTokenizer.segment(sentence)) {
             if (term.word.matches("\\d{4}([-/.年])\\d{1,2}([-/.月])\\d{1,2}日?")

@@ -1,8 +1,10 @@
 package com.ginko.httpforward.controller;
 
+import org.apache.http.impl.client.HttpClients;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.client.ClientHttpRequest;
 import org.springframework.http.client.ClientHttpResponse;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +40,11 @@ public class maincontroller {
         if (httpMethod == null) {
             return;
         }
-        ClientHttpRequest delegate = new SimpleClientHttpRequestFactory().createRequest(newUri, httpMethod);
+        //ClientHttpRequest delegate = new SimpleClientHttpRequestFactory().createRequest(newUri, httpMethod);
+        HttpComponentsClientHttpRequestFactory factory =
+                new HttpComponentsClientHttpRequestFactory(HttpClients.createDefault());
+
+        ClientHttpRequest delegate = factory.createRequest(newUri, httpMethod);
         Enumeration<String> headerNames = request.getHeaderNames();
         // 忽略客戶端請求頭
         List<String> skipHeaders = Arrays.asList("connection", "host", "content-length", "transfer-encoding");
